@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Art Map (Assignment 2)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px #0001;
+            padding: 1.5rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3436;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .desc {
+            text-align: center;
+            color: #636e72;
+            margin-bottom: 1.5rem;
+        }
+
+        #map {
+            width: 100%;
+            height: 520px;
+            border-radius: 10px;
+            border: 1.5px solid #b2bec3;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: #636e72;
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Indian Art Map</h1>
+        <div class="desc">
+            Explore the key periods and locations of Indian art history, from the Indus Valley to Modern India.
+        </div>
+        <div id="map"></div>
+        <div class="footer">Assignment 2 | RC | Indian Art Timeline</div>
+    </div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Data for Indian art periods
+        const artPeriods = [
+            {
+                name: "Indus Valley Civilization",
+                years: "3300 BC - 1300 BC",
+                lat: 28.021, lng: 70.247, // Mohenjo-daro
+                img: "https://dics.co/uploads/2023/05/1683008561Copy-of-Copy-of-Blog-images-Final-(1).webp",
+                desc: "Terracotta seals and bronze sculptures first emerged. The famous bronze dancer is a symbol of this era."
+            },
+            {
+                name: "Mauryan Period",
+                years: "322 BC - 185 BC",
+                lat: 25.609, lng: 85.123, // Pataliputra
+                img: "https://tse4.mm.bing.net/th/id/OIP.1iEVmY-7meq_3JullHvDDwHaEK?pid=Api&P=0&h=180",
+                desc: "Spiritual stone carvings, including the Lion Capital of Ashoka, a symbol of Dharma."
+            },
+            {
+                name: "Gupta Period",
+                years: "320 - 550",
+                lat: 24.262, lng: 82.656, // Sarnath
+                img: "https://tse3.mm.bing.net/th/id/OIP.plBLXk14pJ7j75Baq9cKjAHaEK?pid=Api&P=0&h=180",
+                desc: "Golden age of Indian art: elegant murals, sculpture, and architecture."
+            },
+            {
+                name: "Chola Dynasty",
+                years: "850 - 1279",
+                lat: 10.963, lng: 79.327, // Thanjavur
+                img: "https://st.adda247.com/https://adda247jobs-wp-assets-adda247.s3.ap-south-1.amazonaws.com/jobs/wp-content/uploads/sites/4/2023/03/15105455/Chola-Dynasty.png",
+                desc: "Devotional Chola bronzes, especially the Nataraja, are iconic."
+            },
+            {
+                name: "Mughal Era",
+                years: "1526 - 1857",
+                lat: 28.6139, lng: 77.2090, // Delhi
+                img: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Mughal_miniature_painting.jpg",
+                desc: "Refined Mughal miniatures, gardens, and architecture flourished."
+            },
+            {
+                name: "Colonial Period",
+                years: "1858 - 1947",
+                lat: 8.5241, lng: 76.9366, // Kerala (Raja Ravi Varma)
+                img: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Raja_Ravi_Varma_-_Shakuntala.jpg",
+                desc: "Raja Ravi Varma's mythological oil paintings bridged tradition and modernity."
+            },
+            {
+                name: "Modern/Contemporary India",
+                years: "1947 - Present",
+                lat: 19.0760, lng: 72.8777, // Mumbai (MF Husain)
+                img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Progressive_Artists_Group.jpg",
+                desc: "Modern masters like MF Husain brought bold strokes and new visions to Indian art."
+            }
+        ];
+
+        const map = L.map('map').setView([22.5, 80.5], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        artPeriods.forEach(period => {
+            const marker = L.marker([period.lat, period.lng]).addTo(map);
+            marker.bindPopup(`
+        <div style='font-weight:bold;color:#0984e3;'>${period.name} <span style='font-size:0.95em;color:#636e72;'>(${period.years})</span></div>
+        <img src='${period.img}' alt='${period.name}' style='width:200px;max-width:90vw;border-radius:8px;margin:0.5rem 0;border:1px solid #dfe6e9;'/>
+        <div style='color:#222;'>${period.desc}</div>
+      `);
+        });
+    </script>
+</body>
+
+</html>
